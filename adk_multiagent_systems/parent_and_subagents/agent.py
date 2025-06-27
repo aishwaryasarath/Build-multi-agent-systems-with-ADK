@@ -28,6 +28,7 @@ attractions_planner = Agent(
     before_model_callback=log_query_to_model,
     after_model_callback=log_model_response,
     # When instructed to do so, paste the tools parameter below this line
+    sub_agents=[travel_brainstormer, attractions_planner]
 
     )
 
