@@ -13,4 +13,8 @@ EOF
 
 cp parent_and_subagents/.env workflow_agents/.env
 
+
+cd ~/adk_multiagent_systems
+adk run parent_and_subagents
+
 ```
