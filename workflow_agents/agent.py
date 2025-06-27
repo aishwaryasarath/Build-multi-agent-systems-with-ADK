@@ -1,7 +1,7 @@
 import os
 import logging
 import google.cloud.logging
-
+from google.adk.tools import exit_loop
 from dotenv import load_dotenv
 
 from google.adk import Agent
@@ -56,6 +56,7 @@ critic = Agent(
     - Do the characters' struggles seem engaging?
     - Does it feel grounded in a real time period in history?
     - Does it sufficiently incorporate historical details from the RESEARCH?
+    If the PLOT_OUTLINE does a good job with these questions, exit the writing loop with your 'exit_loop' tool.
 
     If significant improvements can be made, use the 'append_to_state' tool to add your feedback to the field 'CRITICAL_FEEDBACK'.
     Explain your decision and briefly summarize the feedback you have provided.
@@ -66,7 +67,8 @@ critic = Agent(
     RESEARCH:
     {{ research? }}
     """,
-    tools=[append_to_state],
+    #tools=[append_to_state],
+    tools=[append_to_state, exit_loop],
 )
 
 file_writer = Agent(
@@ -168,15 +170,6 @@ writers_room = LoopAgent(
     ],
     max_iterations=3,
 )
-# film_concept_team = SequentialAgent(
-#     name="film_concept_team",
-#     description="Write a film plot outline and save it as a text file.",
-#     sub_agents=[
-#         researcher,
-#         screenwriter,
-#         file_writer
-#     ],
-# )
 film_concept_team = SequentialAgent(
     name="film_concept_team",
     description="Write a film plot outline and save it as a text file.",
@@ -185,9 +178,6 @@ film_concept_team = SequentialAgent(
         file_writer
     ],
 )
-Copied!
-
-
 root_agent = Agent(
     name="greeter",
     model=model_name,
