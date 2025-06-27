@@ -46,6 +46,10 @@ attractions_planner = Agent(
     description="Build a list of attractions to visit in a country.",
     instruction="""
         - Provide the user options for attractions to visit within their selected country.
+        - When they reply, use your tool to save their selected attraction
+        and then provide more possible attractions.
+        - If they ask to view the list, provide a bulleted list of
+        {{ attractions? }} and then suggest some more.
         """,
     before_model_callback=log_query_to_model,
     after_model_callback=log_model_response,
