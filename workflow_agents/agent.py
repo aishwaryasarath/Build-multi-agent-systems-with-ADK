@@ -158,7 +158,16 @@ researcher = Agent(
         append_to_state,
     ],
 )
-
+writers_room = LoopAgent(
+    name="writers_room",
+    description="Iterates through research and writing to improve a movie plot outline.",
+    sub_agents=[
+        researcher,
+        screenwriter,
+        critic
+    ],
+    max_iterations=3,
+)
 film_concept_team = SequentialAgent(
     name="film_concept_team",
     description="Write a film plot outline and save it as a text file.",
