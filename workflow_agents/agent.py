@@ -168,15 +168,25 @@ writers_room = LoopAgent(
     ],
     max_iterations=3,
 )
+# film_concept_team = SequentialAgent(
+#     name="film_concept_team",
+#     description="Write a film plot outline and save it as a text file.",
+#     sub_agents=[
+#         researcher,
+#         screenwriter,
+#         file_writer
+#     ],
+# )
 film_concept_team = SequentialAgent(
     name="film_concept_team",
     description="Write a film plot outline and save it as a text file.",
     sub_agents=[
-        researcher,
-        screenwriter,
+        writers_room,
         file_writer
     ],
 )
+Copied!
+
 
 root_agent = Agent(
     name="greeter",
